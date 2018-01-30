@@ -55,4 +55,11 @@ class HCMenuServiceProvider extends HCBaseServiceProvider
      * @var string
      */
     protected $namespace = 'HoneyComb\Menu\Http\Controllers';
+
+    /**
+     * Provider name
+     *
+     * @var string
+     */
+    protected $packageName = 'HCMenu';
 }
