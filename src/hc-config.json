@@ -1,0 +1,14 @@
+{
+    "general": {
+        "packageName": "HCMenu",
+        "sequence": 0,
+        "namespace": "HoneyComb\\Menu\\"
+    },
+    "formData": {},
+    "adminMenu": [],
+    "seeder": "",
+    "routes": [],
+    "acl": {
+        "permissions": []
+    }
+}
