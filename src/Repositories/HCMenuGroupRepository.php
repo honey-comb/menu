@@ -29,14 +29,14 @@ class HCMenuGroupRepository extends HCBaseRepository
         $records = $this->makeQuery()->whereIn('id', $ids)->get();
 
         foreach ($records as $record) {
-            /** @var HCMenuGroup $user */
+            /** @var HCMenuGroup $record */
             $record->translations()->delete();
             $record->delete();
         }
     }
 
     /**
-     * Restore soft deleted users
+     * Restore soft deleted records
      *
      * @param array $ids
      * @return void
@@ -53,7 +53,7 @@ class HCMenuGroupRepository extends HCBaseRepository
     }
 
     /**
-     * Force delete users by given id
+     * Force delete records by given id
      *
      * @param array $ids
      * @return void

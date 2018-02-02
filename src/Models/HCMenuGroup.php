@@ -49,11 +49,6 @@ class HCMenuGroup extends HCUuidModel
     protected $table = 'hc_menu_group';
 
     /**
-     * @var array
-     */
-    protected $with = ['translations'];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -61,4 +56,12 @@ class HCMenuGroup extends HCUuidModel
     protected $fillable = [
         "id"
     ];
+
+    /**
+     * @var array
+     */
+    protected $with = [
+        'translations'
+    ];
+
 }
