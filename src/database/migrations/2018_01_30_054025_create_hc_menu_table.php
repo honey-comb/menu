@@ -25,12 +25,12 @@ class CreateHcMenuTable extends Migration {
 			$table->uuid('parent_id')->index()->nullable();
 
 			$table->string('label');
-			$table->enum('type', array('url','page','parent'));
+			$table->enum('target', array('url','page','parent'));
 			$table->integer('sequence');
 			$table->string('icon')->nullable();
 			$table->string('url', 2000)->nullable();
 			$table->string('url_text')->nullable();
-			$table->enum('url_type', array('_self','_blank'))->nullable();
+			$table->enum('url_target', array('_self','_blank'))->nullable();
 
             $table->foreign('type_id')->references('id')
                 ->on('hc_menu_type')
