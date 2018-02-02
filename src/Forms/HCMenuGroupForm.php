@@ -29,6 +29,7 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Forms;
 
+use HoneyComb\Menu\Repositories\HCMenuTypeRepository;
 use HoneyComb\Starter\Forms\HCBaseForm;
 
 /**
@@ -41,6 +42,15 @@ class HCMenuGroupForm extends HCBaseForm
      * @var bool
      */
     protected $multiLanguage = true;
+    /**
+     * @var HCMenuTypeRepository
+     */
+    private $typeRepository;
+
+    public function __construct(HCMenuTypeRepository $typeRepository)
+    {
+        $this->typeRepository = $typeRepository;
+    }
 
     /**
      * Creating form
@@ -76,10 +86,18 @@ class HCMenuGroupForm extends HCBaseForm
     public function getStructureNew(string $prefix): array
     {
         return [
+            $prefix . 'type_id' =>
+                [
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu.type'),
+                    'required' => 1,
+                    'requiredVisible' => 1,
+                    'options' => $this->typeRepository->all(['id'])
+                ],
             $prefix . 'translations.label' =>
                 [
                     'type' => 'singleLine',
-                    'label' => trans('HCMenu::menu_group.label'),
+                    'label' => trans('HCMenu::menu.label'),
                     'multiLanguage' => 1,
                     'required' => 1,
                     'requiredVisible' => 1,
@@ -87,10 +105,8 @@ class HCMenuGroupForm extends HCBaseForm
             $prefix . 'translations.description' =>
                 [
                     'type' => 'textArea',
-                    'label' => trans('HCMenu::menu_group.description'),
+                    'label' => trans('HCMenu::menu.description'),
                     'multiLanguage' => 1,
-                    'required' => 1,
-                    'requiredVisible' => 1,
                 ],
         ];
     }

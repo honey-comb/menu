@@ -99,8 +99,6 @@ class HCMenuTypeForm extends HCBaseForm
                     'type' => 'textArea',
                     'label' => trans('HCMenu::menu_group.description'),
                     'multiLanguage' => 1,
-                    'required' => 1,
-                    'requiredVisible' => 1,
                 ],
         ];
     }
