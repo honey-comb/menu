@@ -37,7 +37,7 @@ class HCMenuTypesSeed extends Seeder
         ];
 
         foreach ($idList as $key => $item) {
-            $this->repository->createOrUpdate(['id' => $item['id']], $item);
+            $this->repository->updateOrCreate(['id' => $item['id']], $item);
         }
 
     }
