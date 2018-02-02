@@ -9,6 +9,10 @@ return [
     "sequence" => "Sequence",
     "icon" => "Icon",
     "url" => "Url",
-    "url_text" => "Url text",
-    "url_type" => "Url type",
+    "url_text" => "Alt text",
+    "url_target" => "Url target",
+    "target" => "Target",
+    "page" => "Page",
+    "self" => "_self",
+    "blank" => "_blank",
 ];

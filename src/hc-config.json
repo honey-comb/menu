@@ -6,7 +6,8 @@
     },
     "formData": {
         "menu.group": "HoneyComb\\Menu\\Forms\\HCMenuGroupForm",
-        "menu.types": "HoneyComb\\Menu\\Forms\\HCMenuTypeForm"
+        "menu.types": "HoneyComb\\Menu\\Forms\\HCMenuTypeForm",
+        "menu": "HoneyComb\\Menu\\Forms\\HCMenuForm"
     },
     "adminMenu": [
         {
@@ -22,12 +23,20 @@
             "translation": "HCMenu::menu_types.page_title",
             "icon": "filter",
             "aclPermission": "honey_comb_menu_menu_types_list"
+        },
+        {
+            "route": "admin.menu.index",
+            "parent": "admin.index",
+            "translation": "HCMenu::menu.page_title",
+            "icon": "list-alt",
+            "aclPermission": "honey_comb_menu_menu_list"
         }
     ],
     "seeder": "HoneyComb\\Menu\\Database\\Seeds\\HCMenuSeeder",
     "routes": [
         "Routes\/Admin\/routes.menu.groups.php",
-        "Routes\/Admin\/routes.menu.types.php"
+        "Routes\/Admin\/routes.menu.types.php",
+        "Routes\/Admin\/routes.menus.php"
     ],
     "acl": {
         "permissions": [
@@ -49,6 +58,18 @@
                 "actions": [
                     "honey_comb_menu_menu_types_update",
                     "honey_comb_menu_menu_types_list"
+                ]
+            },
+            {
+                "name": "acl.menu",
+                "controller": "HoneyComb\\Menu\\Http\\Controllers\\Admin\\HCMenuController",
+                "actions": [
+                    "honey_comb_menu_menu_update",
+                    "honey_comb_menu_menu_create",
+                    "honey_comb_menu_menu_delete",
+                    "honey_comb_menu_menu_delete_force",
+                    "honey_comb_menu_menu_restore",
+                    "honey_comb_menu_menu_list"
                 ]
             }
         ]
