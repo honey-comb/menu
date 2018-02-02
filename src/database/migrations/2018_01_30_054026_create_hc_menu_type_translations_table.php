@@ -3,17 +3,17 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateHcMenuGroupTranslationsTable extends Migration
-{
+class CreateHcMenuTypeTranslationsTable extends Migration {
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('hc_menu_group_translations', function(Blueprint $table) {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('hc_menu_type_translations', function(Blueprint $table)
+		{
             $table->increments('count');
             $table->uuid('id')->unique();
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -35,19 +35,18 @@ class CreateHcMenuGroupTranslationsTable extends Migration
                 ->on('hc_languages')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
+		});
+	}
 
-        });
-    }
 
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::drop('hc_menu_group_translations');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('hc_menu_type_translations');
+	}
 
 }
