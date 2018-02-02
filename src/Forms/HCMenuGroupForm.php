@@ -84,6 +84,14 @@ class HCMenuGroupForm extends HCBaseForm
                     'required' => 1,
                     'requiredVisible' => 1,
                 ],
+            $prefix . 'translations.description' =>
+                [
+                    'type' => 'textArea',
+                    'label' => trans('HCMenu::menu_group.description'),
+                    'multiLanguage' => 1,
+                    'required' => 1,
+                    'requiredVisible' => 1,
+                ],
         ];
     }
 
