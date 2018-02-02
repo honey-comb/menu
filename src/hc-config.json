@@ -15,24 +15,42 @@
             "translation": "HCMenu::menu_group.page_title",
             "icon": "columns",
             "aclPermission": "honey_comb_menu_menu_group_list"
+        },
+        {
+            "route": "admin.menu.types.index",
+            "parent": "admin.index",
+            "translation": "HCMenu::menu_types.page_title",
+            "icon": "filter",
+            "aclPermission": "honey_comb_menu_menu_types_list"
         }
     ],
     "seeder": "HoneyComb\\Menu\\Database\\Seeds\\HCMenuSeeder",
     "routes": [
-        "Routes\/Admin\/routes.menu.groups.php"
+        "Routes\/Admin\/routes.menu.groups.php",
+        "Routes\/Admin\/routes.menu.types.php"
     ],
     "acl": {
-        "permissions": {
-            "name": "acl.menu.group",
-            "controller": "HoneyComb\\Menu\\Http\\Controllers\\Admin\\HCMenuGroupController",
-            "actions": [
-                "honey_comb_menu_menu_group_update",
-                "honey_comb_menu_menu_group_create",
-                "honey_comb_menu_menu_group_delete",
-                "honey_comb_menu_menu_group_delete_force",
-                "honey_comb_menu_menu_group_restore",
-                "honey_comb_menu_menu_group_list"
-            ]
-        }
+        "permissions": [
+            {
+                "name": "acl.menu.group",
+                "controller": "HoneyComb\\Menu\\Http\\Controllers\\Admin\\HCMenuGroupController",
+                "actions": [
+                    "honey_comb_menu_menu_group_update",
+                    "honey_comb_menu_menu_group_create",
+                    "honey_comb_menu_menu_group_delete",
+                    "honey_comb_menu_menu_group_delete_force",
+                    "honey_comb_menu_menu_group_restore",
+                    "honey_comb_menu_menu_group_list"
+                ]
+            },
+            {
+                "name": "acl.menu.types",
+                "controller": "HoneyComb\\Menu\\Http\\Controllers\\Admin\\HCMenuTypeController",
+                "actions": [
+                    "honey_comb_menu_menu_types_update",
+                    "honey_comb_menu_menu_types_list"
+                ]
+            }
+        ]
     }
 }
