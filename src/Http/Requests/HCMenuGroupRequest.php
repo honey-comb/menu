@@ -13,21 +13,9 @@ class HCMenuGroupRequest extends FormRequest
      *
      * @return array
      */
-    public function getInput(): array
+    public function getRecordData(): array
     {
         return request()->all();
-    }
-
-    /**
-     * Getting translations
-     *
-     * @return array
-     */
-    public function getTranslations(): array
-    {
-        $data = request()->all();
-
-        return array_get($data, 'translations');
     }
 
     /**
@@ -38,6 +26,16 @@ class HCMenuGroupRequest extends FormRequest
     public function getListIds(): array
     {
         return $this->input('list', []);
+    }
+
+    /**
+     * Getting translations
+     *
+     * @return array
+     */
+    public function getTranslations(): array
+    {
+        return $this->input('translations', []);
     }
 
     /**
@@ -75,7 +73,6 @@ class HCMenuGroupRequest extends FormRequest
                 return [
                     'translations' => 'required|array|min:1',
                 ];
-
 
             case 'DELETE':
                 return [
