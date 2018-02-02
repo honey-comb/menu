@@ -12,14 +12,14 @@
     "adminMenu": [
         {
             "route": "admin.menu.group.index",
-            "parent": "admin.index",
+            "parent": "admin.menu.index",
             "translation": "HCMenu::menu_group.page_title",
             "icon": "columns",
             "aclPermission": "honey_comb_menu_menu_group_list"
         },
         {
             "route": "admin.menu.types.index",
-            "parent": "admin.index",
+            "parent": "admin.menu.index",
             "translation": "HCMenu::menu_types.page_title",
             "icon": "filter",
             "aclPermission": "honey_comb_menu_menu_types_list"
