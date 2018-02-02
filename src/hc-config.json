@@ -5,7 +5,8 @@
         "namespace": "HoneyComb\\Menu\\"
     },
     "formData": {
-        "menu.group": "HoneyComb\\Menu\\Forms\\HCMenuGroupForm"
+        "menu.group": "HoneyComb\\Menu\\Forms\\HCMenuGroupForm",
+        "menu.types": "HoneyComb\\Menu\\Forms\\HCMenuTypeForm"
     },
     "adminMenu": [
         {
