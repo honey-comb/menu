@@ -29,13 +29,4 @@ class HCMenuTargetEnum extends Enumerable
     {
         return self::make('page', trans('HCMenu::menu.page'));
     }
-
-    /**
-     * @return HCMenuTargetEnum|Enumerable
-     * @throws \ReflectionException
-     */
-    final public static function parent(): HCMenuTargetEnum
-    {
-        return self::make('parent', trans('HCMenu::menu.parent'));
-    }
 }
