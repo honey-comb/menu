@@ -73,7 +73,9 @@ class HCMenuGroupController extends HCBaseController
     public function getTableColumns(): array
     {
         $columns = [
-            'id' => $this->headerText(trans('HCMenu::menu_group.id')),
+            'type_id' => $this->headerText(trans('HCMenu::menu_group.type')),
+            'translation.label' => $this->headerText(trans('HCMenu::menu_group.label')),
+            'translation.description' => $this->headerText(trans('HCMenu::menu_group.description')),
         ];
 
         return $columns;

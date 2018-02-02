@@ -1,4 +1,7 @@
 <?php
-    return [
-        "page_title" => "Page title","id" => "Id",
-    ];
+return [
+    "page_title" => "Types",
+    "label" => "Label",
+    "description" => "Description",
+    "id" => "id"
+];

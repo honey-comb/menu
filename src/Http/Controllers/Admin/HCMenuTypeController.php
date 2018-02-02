@@ -74,6 +74,8 @@ class HCMenuTypeController extends HCBaseController
     {
         $columns = [
             'id' => $this->headerText(trans('HCMenu::menu_types.id')),
+            'translation.label' => $this->headerText(trans('HCMenu::menu_types.label')),
+            'translation.description' => $this->headerText(trans('HCMenu::menu_types.description')),
         ];
 
         return $columns;

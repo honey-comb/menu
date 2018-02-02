@@ -89,15 +89,21 @@ class HCMenuGroupForm extends HCBaseForm
             $prefix . 'type_id' =>
                 [
                     'type' => 'dropDownList',
-                    'label' => trans('HCMenu::menu.type'),
+                    'label' => trans('HCMenu::menu_group.type'),
                     'required' => 1,
                     'requiredVisible' => 1,
-                    'options' => $this->typeRepository->all(['id'])
+                    'options' => $this->typeRepository->all()->map(function($item) {
+
+                        return [
+                            'id' => $item->id,
+                            'label' => $item->translation->label
+                        ];
+                    }),
                 ],
             $prefix . 'translations.label' =>
                 [
                     'type' => 'singleLine',
-                    'label' => trans('HCMenu::menu.label'),
+                    'label' => trans('HCMenu::menu_group.label'),
                     'multiLanguage' => 1,
                     'required' => 1,
                     'requiredVisible' => 1,
@@ -105,7 +111,7 @@ class HCMenuGroupForm extends HCBaseForm
             $prefix . 'translations.description' =>
                 [
                     'type' => 'textArea',
-                    'label' => trans('HCMenu::menu.description'),
+                    'label' => trans('HCMenu::menu_group.description'),
                     'multiLanguage' => 1,
                 ],
         ];

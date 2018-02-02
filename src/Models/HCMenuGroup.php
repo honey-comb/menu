@@ -61,7 +61,8 @@ class HCMenuGroup extends HCUuidModel
      * @var array
      */
     protected $with = [
-        'translations'
+        'translations',
+        'translation',
     ];
 
 }
