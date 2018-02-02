@@ -27,7 +27,7 @@ class CreateHcMenuTypeTranslationsTable extends Migration {
             $table->text('description', 65535)->nullable();
 
             $table->foreign('record_id')->references('id')
-                ->on('hc_menu_group')
+                ->on('hc_menu_type')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
 
