@@ -19,6 +19,13 @@ class CreateHcMenuGroupTable extends Migration {
             $table->datetime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->datetime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->datetime('deleted_at')->nullable();
+
+            $table->uuid('type_id');
+
+            $table->foreign('type_id')->references('id')
+                ->on('hc_menu_type')
+                ->onUpdate('NO ACTION')
+                ->onDelete('NO ACTION');
 		});
 	}
 
