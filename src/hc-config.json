@@ -16,7 +16,7 @@
             "aclPermission": "honey_comb_menu_menu_group_list"
         }
     ],
-    "seeder": "",
+    "seeder": "HoneyComb\\Menu\\Database\\Seeds\\HCMenuSeeder",
     "routes": [
         "Routes\/Admin\/routes.menu.groups.php"
     ],

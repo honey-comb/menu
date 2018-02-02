@@ -27,7 +27,7 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Menu\database\seeds;
+namespace HoneyComb\Menu\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 
@@ -40,6 +40,6 @@ class HCMenuSeeder extends Seeder
      */
     public function run(): void
     {
-
+        $this->call(HCMenuTypesSeed::class);
     }
 }
