@@ -4,11 +4,34 @@
         "sequence": 0,
         "namespace": "HoneyComb\\Menu\\"
     },
-    "formData": {},
-    "adminMenu": [],
+    "formData": {
+        "menu.group": "HoneyComb\\Menu\\Forms\\HCMenuGroupForm"
+    },
+    "adminMenu": [
+        {
+            "route": "admin.menu.group.index",
+            "parent": "admin.index",
+            "translation": "HCMenu::menu_group.page_title",
+            "icon": "columns",
+            "aclPermission": "honey_comb_menu_menu_group_list"
+        }
+    ],
     "seeder": "",
-    "routes": [],
+    "routes": [
+        "Routes\/Admin\/routes.menu.groups.php"
+    ],
     "acl": {
-        "permissions": []
+        "permissions": {
+            "name": "acl.menu.group",
+            "controller": "HoneyComb\\Menu\\Http\\Controllers\\Admin\\HCMenuGroupController",
+            "actions": [
+                "honey_comb_menu_menu_group_update",
+                "honey_comb_menu_menu_group_create",
+                "honey_comb_menu_menu_group_delete",
+                "honey_comb_menu_menu_group_delete_force",
+                "honey_comb_menu_menu_group_restore",
+                "honey_comb_menu_menu_group_list"
+            ]
+        }
     }
 }
