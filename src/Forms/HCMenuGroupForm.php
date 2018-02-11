@@ -71,10 +71,8 @@ class HCMenuGroupForm extends HCBaseForm
         ];
 
         if ($this->multiLanguage) {
-            $form['availableLanguages'] = ['en', 'lt'];
+            $form['availableLanguages'] = getHCContentLanguages();
         }
-
-        //TOTO implement honeycomb-languages package getAvailableLanguages
 
         return $form;
     }
@@ -94,10 +92,12 @@ class HCMenuGroupForm extends HCBaseForm
                     'requiredVisible' => 1,
                     'options' => $this->typeRepository->all()->map(function($item) {
 
-                        return [
-                            'id' => $item->id,
-                            'label' => $item->translation->label
-                        ];
+                        $formatted = ['id' => $item->id];
+
+                        if ($item->translation)
+                            $formatted['label'] = $item->translation->label;
+
+                        return $formatted;
                     }),
                 ],
             $prefix . 'translations.label' =>

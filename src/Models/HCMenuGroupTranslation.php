@@ -29,23 +29,21 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Models;
 
-use HoneyComb\Starter\Models\HCUuidModel;
+use HoneyComb\Starter\Models\HCModel;
 
 
 /**
  * Class HCMenuGroupTranslations
  * @package HoneyComb\Menu\Models
  */
-class HCMenuGroupTranslations extends HCUuidModel
+class HCMenuGroupTranslation extends HCModel
 {
-    
-
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'hc_menu_group_translations';
+    protected $table = 'hc_menu_group_translation';
 
     /**
      * The attributes that are mass assignable.

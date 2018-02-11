@@ -64,7 +64,7 @@ class HCMenuRequest extends FormRequest
                 }
 
                 return [
-                    'language_code' => 'required|exists:hc_languages,iso_639_1',
+                    'language_code' => 'required|exists:hc_language,iso_639_1',
                     'label' => 'required|string|min:1',
                     'type_id' => 'required|exists:hc_menu_type,id',
                 ];
@@ -72,7 +72,7 @@ class HCMenuRequest extends FormRequest
             case 'PUT':
 
                 return [
-                    'language_code' => 'required|exists:hc_languages,iso_639_1',
+                    'language_code' => 'required|exists:hc_language,iso_639_1',
                     'label' => 'required|string|min:1',
                     'type_id' => 'required|exists:hc_menu_type,id',
                 ];

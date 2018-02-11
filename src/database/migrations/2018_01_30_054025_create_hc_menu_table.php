@@ -20,7 +20,7 @@ class CreateHcMenuTable extends Migration
             $table->datetime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->datetime('deleted_at')->nullable();
 
-            $table->uuid('language_code')->index();
+            $table->string('language_code', 2)->index();
             $table->uuid('type_id')->index();
             $table->uuid('parent_id')->index()->nullable();
 
@@ -38,7 +38,7 @@ class CreateHcMenuTable extends Migration
                 ->onDelete('NO ACTION');
 
             $table->foreign('language_code')->references('iso_639_1')
-                ->on('hc_languages')
+                ->on('hc_language')
                 ->onUpdate('NO ACTION')
                 ->onDelete('NO ACTION');
         });
