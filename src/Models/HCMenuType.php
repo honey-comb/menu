@@ -32,7 +32,6 @@ namespace HoneyComb\Menu\Models;
 use HoneyComb\Starter\Models\HCUuidModel;
 use HoneyComb\Core\Models\Traits\HCTranslation;
 
-
 /**
  * Class HCMenuType
  * @package HoneyComb\Menu\Models

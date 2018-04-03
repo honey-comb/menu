@@ -31,6 +31,10 @@ namespace HoneyComb\Menu\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class HCMenuSeeder
+ * @package HoneyComb\Menu\Database\Seeds
+ */
 class HCMenuSeeder extends Seeder
 {
     /**

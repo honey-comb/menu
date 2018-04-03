@@ -31,7 +31,6 @@ namespace HoneyComb\Menu\Models;
 
 use HoneyComb\Starter\Models\HCModel;
 
-
 /**
  * Class HCMenuGroupTranslations
  * @package HoneyComb\Menu\Models

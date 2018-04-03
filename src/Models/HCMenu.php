@@ -38,8 +38,6 @@ use HoneyComb\Starter\Models\HCUuidModel;
  */
 class HCMenu extends HCUuidModel
 {
-
-
     /**
      * The database table used by the model.
      *
