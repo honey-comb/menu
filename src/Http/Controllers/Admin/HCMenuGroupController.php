@@ -29,12 +29,16 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Http\Controllers\Admin;
 
-use HoneyComb\Menu\Services\HCMenuGroupService;
-use HoneyComb\Menu\Requests\Admin\HCMenuGroupRequest;
-use HoneyComb\Menu\Models\HCMenuGroup;
-
 use HoneyComb\Core\Http\Controllers\HCBaseController;
 use HoneyComb\Core\Http\Controllers\Traits\HCAdminListHeaders;
+use HoneyComb\Menu\Events\Admin\MenuGroup\HCMenuGroupCreated;
+use HoneyComb\Menu\Events\Admin\MenuGroup\HCMenuGroupForceDeleted;
+use HoneyComb\Menu\Events\Admin\MenuGroup\HCMenuGroupRestored;
+use HoneyComb\Menu\Events\Admin\MenuGroup\HCMenuGroupSoftDeleted;
+use HoneyComb\Menu\Events\Admin\MenuGroup\HCMenuGroupUpdated;
+use HoneyComb\Menu\Models\HCMenuGroup;
+use HoneyComb\Menu\Requests\Admin\HCMenuGroupRequest;
+use HoneyComb\Menu\Services\HCMenuGroupService;
 use HoneyComb\Starter\Helpers\HCFrontendResponse;
 use Illuminate\Database\Connection;
 use Illuminate\Http\JsonResponse;
@@ -142,8 +146,9 @@ class HCMenuGroupController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $model = $this->service->getRepository()->create($request->getRecordData());
-            $model->updateTranslations($request->getTranslations());
+            /** @var HCMenuGroup $record */
+            $record = $this->service->getRepository()->create($request->getRecordData());
+            $record->updateTranslations($request->getTranslations());
 
             $this->connection->commit();
         } catch (\Exception $e) {
@@ -151,6 +156,8 @@ class HCMenuGroupController extends HCBaseController
 
             return $this->response->error($e->getMessage());
         }
+
+        event(new HCMenuGroupCreated($record));
 
         return $this->response->success("Created");
     }
@@ -164,9 +171,16 @@ class HCMenuGroupController extends HCBaseController
      */
     public function update(HCMenuGroupRequest $request, string $id): JsonResponse
     {
-        $model = $this->service->getRepository()->findOneBy(['id' => $id]);
-        $model->update($request->getRecordData());
-        $model->updateTranslations($request->getTranslations());
+        /** @var HCMenuGroup $record */
+        $record = $this->service->getRepository()->findOneBy(['id' => $id]);
+        $record->update($request->getRecordData());
+        $record->updateTranslations($request->getTranslations());
+
+        if ($record) {
+            $record = $this->service->getRepository()->find($id);
+
+            event(new HCMenuGroupUpdated($record));
+        }
 
         return $this->response->success("Created");
     }
@@ -181,7 +195,7 @@ class HCMenuGroupController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->deleteSoft($request->getListIds());
+            $deleted = $this->service->getRepository()->deleteSoft($request->getListIds());
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -189,6 +203,8 @@ class HCMenuGroupController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCMenuGroupSoftDeleted($deleted));
 
         return $this->response->success('Successfully deleted');
     }
@@ -203,7 +219,7 @@ class HCMenuGroupController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->restore($request->getListIds());
+            $restored = $this->service->getRepository()->restore($request->getListIds());
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -211,6 +227,8 @@ class HCMenuGroupController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCMenuGroupRestored($restored));
 
         return $this->response->success('Successfully restored');
     }
@@ -225,7 +243,7 @@ class HCMenuGroupController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->deleteForce($request->getListIds());
+            $deleted = $this->service->getRepository()->deleteForce($request->getListIds());
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -233,6 +251,8 @@ class HCMenuGroupController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCMenuGroupForceDeleted($deleted));
 
         return $this->response->success('Successfully deleted');
     }

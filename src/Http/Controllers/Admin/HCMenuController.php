@@ -31,6 +31,11 @@ namespace HoneyComb\Menu\Http\Controllers\Admin;
 
 use HoneyComb\Core\Http\Controllers\HCBaseController;
 use HoneyComb\Core\Http\Controllers\Traits\HCAdminListHeaders;
+use HoneyComb\Menu\Events\Admin\Menu\HCMenuCreated;
+use HoneyComb\Menu\Events\Admin\Menu\HCMenuForceDeleted;
+use HoneyComb\Menu\Events\Admin\Menu\HCMenuRestored;
+use HoneyComb\Menu\Events\Admin\Menu\HCMenuSoftDeleted;
+use HoneyComb\Menu\Events\Admin\Menu\HCMenuUpdated;
 use HoneyComb\Menu\Models\HCMenu;
 use HoneyComb\Menu\Requests\Admin\HCMenuRequest;
 use HoneyComb\Menu\Services\HCMenuService;
@@ -148,7 +153,8 @@ class HCMenuController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $model = $this->service->getRepository()->create($request->getRecordData());
+            /** @var HCMenu $record */
+            $record = $this->service->getRepository()->create($request->getRecordData());
 
             $this->connection->commit();
         } catch (\Exception $e) {
@@ -156,6 +162,8 @@ class HCMenuController extends HCBaseController
 
             return $this->response->error($e->getMessage());
         }
+
+        event(new HCMenuCreated($record));
 
         return $this->response->success("Created");
     }
@@ -169,8 +177,15 @@ class HCMenuController extends HCBaseController
      */
     public function update(HCMenuRequest $request, string $id): JsonResponse
     {
-        $model = $this->service->getRepository()->findOneBy(['id' => $id]);
-        $model->update($request->getRecordData());
+        /** @var HCMenu $record */
+        $record = $this->service->getRepository()->findOneBy(['id' => $id]);
+        $record->update($request->getRecordData());
+
+        if ($record) {
+            $record = $this->service->getRepository()->find($id);
+
+            event(new HCMenuUpdated($record));
+        }
 
         return $this->response->success("Created");
     }
@@ -185,7 +200,7 @@ class HCMenuController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->deleteSoft($request->getListIds());
+            $deleted = $this->service->getRepository()->deleteSoft($request->getListIds());
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -193,6 +208,8 @@ class HCMenuController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCMenuSoftDeleted($deleted));
 
         return $this->response->success('Successfully deleted');
     }
@@ -207,7 +224,7 @@ class HCMenuController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->restore($request->getListIds());
+            $restored = $this->service->getRepository()->restore($request->getListIds());
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -215,6 +232,8 @@ class HCMenuController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCMenuRestored($restored));
 
         return $this->response->success('Successfully restored');
     }
@@ -229,7 +248,7 @@ class HCMenuController extends HCBaseController
         $this->connection->beginTransaction();
 
         try {
-            $this->service->getRepository()->deleteForce($request->getListIds());
+            $deleted = $this->service->getRepository()->deleteForce($request->getListIds());
 
             $this->connection->commit();
         } catch (\Exception $exception) {
@@ -237,6 +256,8 @@ class HCMenuController extends HCBaseController
 
             return $this->response->error($exception->getMessage());
         }
+
+        event(new HCMenuForceDeleted($deleted));
 
         return $this->response->success('Successfully deleted');
     }

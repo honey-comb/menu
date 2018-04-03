@@ -25,43 +25,40 @@
  * http://www.interactivesolutions.lt
  */
 
-declare(strict_types = 1);
+namespace HoneyComb\Menu\Events\Admin\MenuGroup;
 
-namespace HoneyComb\Menu\Models;
 
-use HoneyComb\Core\Models\Traits\HCTranslation;
-use HoneyComb\Starter\Models\HCUuidModel;
+use HoneyComb\Menu\Models\HCMenuGroup;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-/**
- * Class HCMenuType
- * @package HoneyComb\Menu\Models
- */
-class HCMenuType extends HCUuidModel
+class HCMenuGroupUpdated
 {
-    use HCTranslation;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $record;
     /**
-     * The database table used by the model.
+     * Create a new event instance.
      *
-     * @var string
+     * @return void
      */
-    protected $table = 'hc_menu_type';
+    public function __construct(HCMenuGroup $record)
+    {
+        $this->record = $record;
+    }
 
     /**
-     * The attributes that are mass assignable.
+     * Get the channels the event should broadcast on.
      *
-     * @var array
+     * @return \Illuminate\Broadcasting\Channel|array
      */
-    protected $fillable = [
-        'id',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $with = [
-        'translations',
-        'translation',
-    ];
-
+    public function broadcastOn()
+    {
+        return new PrivateChannel('channel-name');
+    }
 }

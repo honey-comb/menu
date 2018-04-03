@@ -31,6 +31,7 @@ namespace HoneyComb\Menu\Http\Controllers\Admin;
 
 use HoneyComb\Core\Http\Controllers\HCBaseController;
 use HoneyComb\Core\Http\Controllers\Traits\HCAdminListHeaders;
+use HoneyComb\Menu\Events\Admin\MenuType\HCMenuTypeUpdated;
 use HoneyComb\Menu\Models\HCMenuType;
 use HoneyComb\Menu\Requests\Admin\HCMenuTypeRequest;
 use HoneyComb\Menu\Services\HCMenuTypeService;
@@ -139,9 +140,16 @@ class HCMenuTypeController extends HCBaseController
      */
     public function update(HCMenuTypeRequest $request, string $id): JsonResponse
     {
-        $model = $this->service->getRepository()->findOneBy(['id' => $id]);
-        $model->update($request->getRecordData());
-        $model->updateTranslations($request->getTranslations());
+        /** @var HCMenuType $record */
+        $record = $this->service->getRepository()->findOneBy(['id' => $id]);
+        $record->update($request->getRecordData());
+        $record->updateTranslations($request->getTranslations());
+
+        if ($record) {
+            $record = $this->service->getRepository()->find($id);
+
+            event(new HCMenuTypeUpdated($record));
+        }
 
         return $this->response->success("Created");
     }

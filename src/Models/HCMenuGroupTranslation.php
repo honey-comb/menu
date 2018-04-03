@@ -45,16 +45,22 @@ class HCMenuGroupTranslation extends HCModel
     protected $table = 'hc_menu_group_translation';
 
     /**
+     * Primary key field
+     *
+     * @var string
+     */
+    protected $primaryKey = 'count';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "id",
-        "record_id",
-        "language_code",
-        "label",
-        "description",
+        'record_id',
+        'language_code',
+        'label',
+        'description',
     ];
 
     /**

@@ -29,7 +29,7 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Database\Seeds;
 
-use HoneyComb\Menu\Repositories\HCMenuTypeRepository;
+use HoneyComb\Menu\Services\HCMenuTypeService;
 use Illuminate\Database\Seeder;
 
 /**
@@ -39,13 +39,17 @@ use Illuminate\Database\Seeder;
 class HCMenuTypesSeed extends Seeder
 {
     /**
-     * @var HCMenuTypeRepository
+     * @var HCMenuTypeService
      */
-    private $repository;
+    private $menuTypeService;
 
-    public function __construct(HCMenuTypeRepository $repository)
+    /**
+     * HCMenuTypesSeed constructor.
+     * @param HCMenuTypeService $menuTypeService
+     */
+    public function __construct(HCMenuTypeService $menuTypeService)
     {
-        $this->repository = $repository;
+        $this->menuTypeService = $menuTypeService;
     }
 
     /**
@@ -53,22 +57,52 @@ class HCMenuTypesSeed extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $idList = [
+        $menuTypes = [
             [
                 'id' => 'top-menu',
+                'translations' => [
+                    [
+                        'language_code' => 'lt',
+                        'label' => 'Viršutinis meniu',
+                    ],
+                    [
+                        'language_code' => 'en',
+                        'label' => 'Top menu',
+                    ],
+                ],
             ],
             [
                 'id' => 'footer-menu',
+                'translations' => [
+                    [
+                        'language_code' => 'lt',
+                        'label' => 'Apatinis meniu',
+                    ],
+                    [
+                        'language_code' => 'en',
+                        'label' => 'Footer menu',
+                    ],
+                ],
             ],
             [
                 'id' => 'side-menu',
+                'translations' => [
+                    [
+                        'language_code' => 'lt',
+                        'label' => 'Šoninis meniu',
+                    ],
+                    [
+                        'language_code' => 'en',
+                        'label' => 'Side menu',
+                    ],
+                ],
             ],
         ];
 
-        foreach ($idList as $key => $item) {
-            $this->repository->updateOrCreate(['id' => $item['id']], $item);
+        foreach ($menuTypes as $key => $menuType) {
+            $this->menuTypeService->createOrUpdateType($menuType['id'], $menuType['translations']);
         }
 
     }

@@ -29,6 +29,7 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Services;
 
+use HoneyComb\Menu\Models\HCMenuType;
 use HoneyComb\Menu\Repositories\HCMenuTypeRepository;
 
 /**
@@ -57,5 +58,16 @@ class HCMenuTypeService
     public function getRepository(): HCMenuTypeRepository
     {
         return $this->repository;
+    }
+
+    /**
+     * @param string $menuTypeId
+     * @param array $translations
+     */
+    public function createOrUpdateType(string $menuTypeId, array $translations): void
+    {
+        /** @var HCMenuType $record */
+        $record =  $this->getRepository()->updateOrCreate(['id' => $menuTypeId]);
+        $record->updateTranslations($translations);
     }
 }
