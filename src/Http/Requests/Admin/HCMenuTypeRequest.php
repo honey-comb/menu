@@ -27,15 +27,15 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Menu\Requests;
+namespace HoneyComb\Menu\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class HCMenuGroupRequest
- * @package HoneyComb\Menu\Requests
+ * Class HCMenuTypeRequest
+ * @package HoneyComb\Menu\Requests\Admin
  */
-class HCMenuGroupRequest extends FormRequest
+class HCMenuTypeRequest extends FormRequest
 {
     /**
      * Get request inputs
@@ -86,8 +86,7 @@ class HCMenuGroupRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'POST':
-
-                if ($this->segment(5) == 'restore') {
+                if ($this->segment(4) == 'restore') {
                     return [
                         'list' => 'required|array',
                     ];

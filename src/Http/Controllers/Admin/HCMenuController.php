@@ -29,12 +29,11 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Http\Controllers\Admin;
 
-use HoneyComb\Menu\Services\HCMenuService;
-use HoneyComb\Menu\Requests\HCMenuRequest;
-use HoneyComb\Menu\Models\HCMenu;
-
 use HoneyComb\Core\Http\Controllers\HCBaseController;
 use HoneyComb\Core\Http\Controllers\Traits\HCAdminListHeaders;
+use HoneyComb\Menu\Models\HCMenu;
+use HoneyComb\Menu\Requests\Admin\HCMenuRequest;
+use HoneyComb\Menu\Services\HCMenuService;
 use HoneyComb\Starter\Helpers\HCFrontendResponse;
 use Illuminate\Database\Connection;
 use Illuminate\Http\JsonResponse;

@@ -29,8 +29,8 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Models;
 
-use HoneyComb\Starter\Models\HCUuidModel;
 use HoneyComb\Core\Models\Traits\HCTranslation;
+use HoneyComb\Starter\Models\HCUuidModel;
 
 /**
  * Class HCMenuType
@@ -53,7 +53,7 @@ class HCMenuType extends HCUuidModel
      * @var array
      */
     protected $fillable = [
-        "id"
+        "id",
     ];
 
     /**

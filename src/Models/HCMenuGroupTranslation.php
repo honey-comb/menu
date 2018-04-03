@@ -50,14 +50,18 @@ class HCMenuGroupTranslation extends HCModel
      * @var array
      */
     protected $fillable = [
-        "id", "record_id", "language_code", "label", "description"
+        "id",
+        "record_id",
+        "language_code",
+        "label",
+        "description",
     ];
 
     /**
      * @var array
      */
     protected $with = [
-        
+
     ];
 
 }

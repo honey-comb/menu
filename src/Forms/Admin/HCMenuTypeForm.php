@@ -27,12 +27,12 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Menu\Forms;
+namespace HoneyComb\Menu\Forms\Admin;
 use HoneyComb\Starter\Forms\HCBaseForm;
 
 /**
  * Class HCMenuTypeForm
- * @package HoneyComb\Menu\Forms
+ * @package HoneyComb\Menu\Forms\Admin
  */
 class HCMenuTypeForm extends HCBaseForm
 {

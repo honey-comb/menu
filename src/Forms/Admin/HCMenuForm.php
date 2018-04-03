@@ -27,7 +27,7 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Menu\Forms;
+namespace HoneyComb\Menu\Forms\Admin;
 
 use HoneyComb\Menu\Enum\HCMenuTargetEnum;
 use HoneyComb\Menu\Enum\HCMenuUrlTargetEnum;
@@ -36,7 +36,7 @@ use HoneyComb\Starter\Forms\HCBaseForm;
 
 /**
  * Class HCMenuForm
- * @package HoneyComb\Menu\Forms
+ * @package HoneyComb\Menu\Forms\Admin
  */
 class HCMenuForm extends HCBaseForm
 {

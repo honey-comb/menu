@@ -27,13 +27,13 @@
 
 declare(strict_types = 1);
 
-namespace HoneyComb\Menu\Requests;
+namespace HoneyComb\Menu\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class HCMenuRequest
- * @package HoneyComb\Menu\Requests
+ * @package HoneyComb\Menu\Requests\Admin
  */
 class HCMenuRequest extends FormRequest
 {

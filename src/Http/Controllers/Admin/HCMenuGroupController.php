@@ -30,7 +30,7 @@ declare(strict_types = 1);
 namespace HoneyComb\Menu\Http\Controllers\Admin;
 
 use HoneyComb\Menu\Services\HCMenuGroupService;
-use HoneyComb\Menu\Requests\HCMenuGroupRequest;
+use HoneyComb\Menu\Requests\Admin\HCMenuGroupRequest;
 use HoneyComb\Menu\Models\HCMenuGroup;
 
 use HoneyComb\Core\Http\Controllers\HCBaseController;
