@@ -36,6 +36,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class HCMenuGroupForceDeleted
+ * @package HoneyComb\Menu\Events\Admin\MenuGroup
+ */
 class HCMenuGroupForceDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;

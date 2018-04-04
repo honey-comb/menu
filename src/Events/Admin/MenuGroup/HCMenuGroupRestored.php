@@ -36,6 +36,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class HCMenuGroupRestored
+ * @package HoneyComb\Menu\Events\Admin\MenuGroup
+ */
 class HCMenuGroupRestored
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;

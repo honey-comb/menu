@@ -36,6 +36,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
+/**
+ * Class HCMenuTypeUpdated
+ * @package HoneyComb\Menu\Events\Admin\MenuType
+ */
 class HCMenuTypeUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
