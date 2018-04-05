@@ -132,6 +132,15 @@ class HCMenuTypeController extends HCBaseController
     }
 
     /**
+     * @param HCMenuTypeRequest $request
+     * @return JsonResponse
+     */
+    public function getList(HCMenuTypeRequest $request): JsonResponse
+    {
+        return response()->json(($this->service->getRepository()->getOptions($request)));
+    }
+
+    /**
      * Updating menu group record
      *
      * @param HCMenuTypeRequest $request

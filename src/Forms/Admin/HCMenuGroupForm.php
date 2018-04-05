@@ -30,6 +30,7 @@ declare(strict_types = 1);
 namespace HoneyComb\Menu\Forms\Admin;
 
 use HoneyComb\Menu\Repositories\HCMenuTypeRepository;
+use HoneyComb\Menu\Requests\Admin\HCMenuTypeRequest;
 use HoneyComb\Starter\Forms\HCBaseForm;
 
 /**
@@ -90,15 +91,8 @@ class HCMenuGroupForm extends HCBaseForm
                     'label' => trans('HCMenu::menu_group.type'),
                     'required' => 1,
                     'requiredVisible' => 1,
-                    'options' => $this->typeRepository->all()->map(function($item) {
-
-                        $formatted = ['id' => $item->id];
-
-                        if ($item->translation)
-                            $formatted['label'] = $item->translation->label;
-
-                        return $formatted;
-                    }),
+                    'options' => $this->typeRepository->getOptions(new HCMenuTypeRequest()),
+//
                 ],
             $prefix . 'translations.label' =>
                 [
