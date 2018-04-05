@@ -54,7 +54,7 @@ class HCMenuGroup extends HCUuidModel
      * @var array
      */
     protected $fillable = [
-        'id',
+        'id', 'type_id',
     ];
 
     /**

@@ -44,7 +44,7 @@ class HCMenuGroupRequest extends FormRequest
      */
     public function getRecordData(): array
     {
-        return request()->all();
+        return request()->all('type_id');
     }
 
     /**
@@ -94,6 +94,7 @@ class HCMenuGroupRequest extends FormRequest
                 }
 
                 return [
+                    'type_id' => 'required|exists:hc_menu_type,id',
                     'translations' => 'required|array|min:1',
                 ];
 
