@@ -31,6 +31,7 @@ namespace HoneyComb\Menu\Repositories;
 
 use HoneyComb\Menu\Models\HCMenuGroup;
 use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
+use HoneyComb\Menu\Requests\Admin\HCMenuGroupRequest;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
 
 /**
@@ -107,5 +108,10 @@ class HCMenuGroupRepository extends HCBaseRepository
         }
 
         return $deleted;
+    }
+
+    public function getOptions(HCMenuGroupRequest $request)
+    {
+        return optimizeTranslationOptions($this->createBuilderQuery($request)->get());
     }
 }

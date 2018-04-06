@@ -136,6 +136,18 @@ class HCMenuGroupController extends HCBaseController
     }
 
     /**
+     * Create data list
+     * @param HCMenuGroupRequest $request
+     * @return JsonResponse
+     */
+    public function getOptions(HCMenuGroupRequest $request): JsonResponse
+    {
+        return response()->json(
+            $this->service->getRepository()->getOptions($request)
+        );
+    }
+
+    /**
      * Creating record
      *
      * @param HCMenuGroupRequest $request

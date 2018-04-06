@@ -135,7 +135,7 @@ class HCMenuTypeController extends HCBaseController
      * @param HCMenuTypeRequest $request
      * @return JsonResponse
      */
-    public function getList(HCMenuTypeRequest $request): JsonResponse
+    public function getOptions(HCMenuTypeRequest $request): JsonResponse
     {
         return response()->json(($this->service->getRepository()->getOptions($request)));
     }

@@ -38,11 +38,15 @@ Route::prefix(config('hc.admin_url'))
 
         Route::prefix('api/menu/group')->group(function() {
 
+//            Route::get('options', 'HCMenuGroupController@getOptions')
+//                ->name('admin.api.menu.group.options')
+//                ->middleware('acl:honey_comb_menu_menu_group_admin_list');
+
             Route::get('/', 'HCMenuGroupController@getListPaginate')
                 ->name('admin.api.menu.group')
                 ->middleware('acl:honey_comb_menu_menu_group_admin_list');
 
-            Route::get('list', 'HCMenuGroupController@getList')
+            Route::get('options', 'HCMenuGroupController@getOptions')
                 ->name('admin.api.menu.group.list')
                 ->middleware('acl:honey_comb_menu_menu_group_admin_list');
 

@@ -31,6 +31,7 @@ namespace HoneyComb\Menu\Repositories;
 
 use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Menu\Models\HCMenu;
+use HoneyComb\Menu\Requests\Admin\HCMenuRequest;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
 
 /**
@@ -107,5 +108,19 @@ class HCMenuRepository extends HCBaseRepository
         }
 
         return $deleted;
+    }
+
+    /**
+     * @param HCMenuRequest $request
+     * @return \Illuminate\Support\Collection|static
+     */
+    public function getOptions(HCMenuRequest $request)
+    {
+        return $this->createBuilderQuery($request)->get()->map(function ($record) {
+            return [
+                'id' => $record->id,
+                'language_code' => $record->language_code
+            ];
+        });
     }
 }
