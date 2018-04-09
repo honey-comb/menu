@@ -39,15 +39,10 @@ Route::prefix(config('hc.admin_url'))
         Route::prefix('api/menu/types')->group(function() {
 
             Route::get('options', 'HCMenuTypeController@getOptions')
-                ->name('admin.api.menu.types.options')
-                ->middleware('acl:honey_comb_menu_menu_group_admin_list');
+                ->name('admin.api.menu.types.options');
 
             Route::get('/', 'HCMenuTypeController@getListPaginate')
                 ->name('admin.api.menu.types')
-                ->middleware('acl:honey_comb_menu_menu_types_admin_list');
-
-            Route::get('list', 'HCMenuTypeController@getList')
-                ->name('admin.api.menu.types.list')
                 ->middleware('acl:honey_comb_menu_menu_types_admin_list');
 
             Route::prefix('{id}')->group(function() {

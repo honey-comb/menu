@@ -43,8 +43,7 @@ Route::prefix(config('hc.admin_url'))
                 ->middleware('acl:honey_comb_menu_menu_admin_list');
 
             Route::get('options', 'HCMenuController@getOptions')
-                ->name('admin.api.menu.list')
-                ->middleware('acl:honey_comb_menu_menu_admin_list');
+                ->name('admin.api.menu.options');
 
             Route::post('/', 'HCMenuController@store')
                 ->name('admin.api.menu.create')
