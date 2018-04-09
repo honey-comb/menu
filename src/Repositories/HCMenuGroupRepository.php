@@ -33,6 +33,7 @@ use HoneyComb\Menu\Models\HCMenuGroup;
 use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Menu\Requests\Admin\HCMenuGroupRequest;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
+use Illuminate\Support\Collection;
 
 /**
  * Class HCMenuGroupRepository
@@ -110,7 +111,11 @@ class HCMenuGroupRepository extends HCBaseRepository
         return $deleted;
     }
 
-    public function getOptions(HCMenuGroupRequest $request)
+    /**
+     * @param HCMenuGroupRequest $request
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection
+     */
+    public function getOptions(HCMenuGroupRequest $request): Collection
     {
         return optimizeTranslationOptions($this->createBuilderQuery($request)->get());
     }

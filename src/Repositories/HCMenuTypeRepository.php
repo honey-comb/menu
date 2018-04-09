@@ -33,6 +33,7 @@ use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Menu\Models\HCMenuType;
 use HoneyComb\Menu\Requests\Admin\HCMenuTypeRequest;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
+use Illuminate\Support\Collection;
 
 /**
  * Class HCMenuTypeRepository
@@ -52,9 +53,9 @@ class HCMenuTypeRepository extends HCBaseRepository
 
     /**
      * @param HCMenuTypeRequest $request
-     * @return mixed
+     * @return \Illuminate\Support\Collection|static
      */
-    public function getOptions(HCMenuTypeRequest $request)
+    public function getOptions(HCMenuTypeRequest $request): Collection
     {
         return $this->createBuilderQuery($request)->get()->map(function ($item) {
             $formatted = ['id' => $item->id];
