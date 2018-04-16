@@ -23,7 +23,7 @@ Begin by installing this package through Composer.
 ```js
 	{
 	    "require": {
-	        "honey-comb/menu": "*"
+	        "honey-comb/menu": "0.3.*"
 	    }
 	}
 ```
