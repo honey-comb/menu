@@ -3,5 +3,6 @@ return [
     "page_title" => "Groups",
     "label" => "Label",
     "description" => "Description",
-    "type" => "Type"
+    "type" => "Type",
+    "group" => "Group"
 ];

@@ -3,7 +3,7 @@
  * @copyright 2018 interactivesolutions
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
+ * of this software and associated documentation files (the 'Software'), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
@@ -12,7 +12,7 @@
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -86,42 +86,52 @@ class HCMenuForm extends HCBaseForm
         return [
             $prefix . 'language_code' =>
                 [
-                    "type" => "dropDownList",
-                    "label" => trans("HCMenu::menu.language_code"),
-                    "required" => 1,
-                    "options" => getHCLanguagesOptions('content'),
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu.language_code'),
+                    'required' => 1,
+                    'options' => getHCLanguagesOptions('content'),
                 ],
             $prefix . 'type_id' =>
                 [
-                    "type" => "dropDownList",
-                    "label" => trans("HCMenu::menu.type_id"),
-                    "required" => 1,
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu.type_id'),
+                    'required' => 1,
                     'options' => optimizeTranslationOptions($this->menuTypeRepository->all()),
+                ],
+            $prefix . 'group_id' =>
+                [
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu_group.group'),
+                    'dependencies' => [
+                        $prefix . 'type_id' => [
+                        ],
+                    ],
+                    'url' => route('admin.api.menu.group.options'),
                 ],
             $prefix . 'target' =>
                 [
-                    "type" => "dropDownList",
-                    "label" => trans("HCMenu::menu.target"),
-                    "required" => 1,
-                    "options" => HCMenuTargetEnum::options(),
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu.target'),
+                    'required' => 1,
+                    'options' => HCMenuTargetEnum::options(),
                 ],
             $prefix . 'label' =>
                 [
-                    "type" => "singleLine",
-                    "label" => trans("HCMenu::menu.label"),
-                    "required" => 1,
+                    'type' => 'singleLine',
+                    'label' => trans('HCMenu::menu.label'),
+                    'required' => 1,
                 ],
             $prefix . 'icon' =>
                 [
-                    "type" => "singleLine",
-                    "label" => trans("HCMenu::menu.icon"),
+                    'type' => 'singleLine',
+                    'label' => trans('HCMenu::menu.icon'),
 
                 ],
             $prefix . 'url' =>
                 [
-                    "type" => "textArea",
-                    "label" => trans("HCMenu::menu.url"),
-                    "dependencies" => [
+                    'type' => 'textArea',
+                    'label' => trans('HCMenu::menu.url'),
+                    'dependencies' => [
                         $prefix . 'target' => [
                             'values' => [HCMenuTargetEnum::url()->id()],
                         ],
@@ -130,9 +140,9 @@ class HCMenuForm extends HCBaseForm
                 ],
             $prefix . 'url_text' =>
                 [
-                    "type" => "singleLine",
-                    "label" => trans("HCMenu::menu.url_text"),
-                    "dependencies" => [
+                    'type' => 'singleLine',
+                    'label' => trans('HCMenu::menu.url_text'),
+                    'dependencies' => [
                         $prefix . 'target' => [
                             'values' => [HCMenuTargetEnum::url()->id()],
                         ],
@@ -141,10 +151,10 @@ class HCMenuForm extends HCBaseForm
                 ],
             $prefix . 'url_target' =>
                 [
-                    "type" => "dropDownList",
-                    "label" => trans("HCMenu::menu.url_target"),
-                    "options" => HCMenuUrlTargetEnum::options(),
-                    "dependencies" => [
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu.url_target'),
+                    'options' => HCMenuUrlTargetEnum::options(),
+                    'dependencies' => [
                         $prefix . 'target' => [
                             'values' => [HCMenuTargetEnum::url()->id()],
                         ],
