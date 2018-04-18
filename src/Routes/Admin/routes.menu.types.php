@@ -35,7 +35,7 @@ Route::domain(config('hc.admin_domain'))
 
         Route::get('menu/types', 'HCMenuTypeController@index')
             ->name('admin.menu.types.index')
-            ->middleware('acl:honey_comb_menu_menu_types_admin_list');
+            ->middleware('acl:honey_comb_menu_menu_types_list');
 
         Route::prefix('api/menu/types')->group(function() {
 
@@ -44,17 +44,17 @@ Route::domain(config('hc.admin_domain'))
 
             Route::get('/', 'HCMenuTypeController@getListPaginate')
                 ->name('admin.api.menu.types')
-                ->middleware('acl:honey_comb_menu_menu_types_admin_list');
+                ->middleware('acl:honey_comb_menu_menu_types_list');
 
             Route::prefix('{id}')->group(function() {
 
                 Route::get('/', 'HCMenuTypeController@getById')
                     ->name('admin.api.menu.types.single')
-                    ->middleware('acl:honey_comb_menu_menu_types_admin_list');
+                    ->middleware('acl:honey_comb_menu_menu_types_list');
 
                 Route::put('/', 'HCMenuTypeController@update')
                     ->name('admin.api.menu.types.update')
-                    ->middleware('acl:honey_comb_menu_menu_types_admin_update');
+                    ->middleware('acl:honey_comb_menu_menu_types_update');
 
             });
         });

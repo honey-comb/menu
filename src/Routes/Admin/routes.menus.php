@@ -35,42 +35,42 @@ Route::domain(config('hc.admin_domain'))
 
         Route::get('menu', 'HCMenuController@index')
             ->name('admin.menu.index')
-            ->middleware('acl:honey_comb_menu_menu_admin_list');
+            ->middleware('acl:honey_comb_menu_menu_list');
 
         Route::prefix('api/menu')->group(function() {
 
             Route::get('/', 'HCMenuController@getListPaginate')
                 ->name('admin.api.menu')
-                ->middleware('acl:honey_comb_menu_menu_admin_list');
+                ->middleware('acl:honey_comb_menu_menu_list');
 
             Route::get('options', 'HCMenuController@getOptions')
                 ->name('admin.api.menu.options');
 
             Route::post('/', 'HCMenuController@store')
                 ->name('admin.api.menu.create')
-                ->middleware('acl:honey_comb_menu_menu_admin_create');
+                ->middleware('acl:honey_comb_menu_menu_create');
 
             Route::delete('/', 'HCMenuController@deleteSoft')
                 ->name('admin.api.menu.delete')
-                ->middleware('acl:honey_comb_menu_menu_admin_delete');
+                ->middleware('acl:honey_comb_menu_menu_delete');
 
             Route::delete('force', 'HCMenuController@deleteForce')
                 ->name('admin.api.menu.delete.force')
-                ->middleware('acl:honey_comb_menu_menu_admin_delete_force');
+                ->middleware('acl:honey_comb_menu_menu_delete_force');
 
             Route::post('restore', 'HCMenuController@restore')
                 ->name('admin.api.menu.restore')
-                ->middleware('acl:honey_comb_menu_menu_admin_restore');
+                ->middleware('acl:honey_comb_menu_menu_restore');
 
             Route::prefix('{id}')->group(function() {
 
                 Route::get('/', 'HCMenuController@getById')
                     ->name('admin.api.menu.single')
-                    ->middleware('acl:honey_comb_menu_menu_admin_list');
+                    ->middleware('acl:honey_comb_menu_menu_list');
 
                 Route::put('/', 'HCMenuController@update')
                     ->name('admin.api.menu.update')
-                    ->middleware('acl:honey_comb_menu_menu_admin_update');
+                    ->middleware('acl:honey_comb_menu_menu_update');
 
             });
         });
