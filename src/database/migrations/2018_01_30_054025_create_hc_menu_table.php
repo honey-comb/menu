@@ -52,7 +52,6 @@ class CreateHcMenuTable extends Migration
 
             $table->string('language_code', 2)->index();
             $table->uuid('type_id')->index();
-            $table->uuid('group_id')->index()->nullable();
             $table->uuid('parent_id')->index()->nullable();
 
             $table->string('label');
@@ -62,11 +61,6 @@ class CreateHcMenuTable extends Migration
             $table->string('url', 2000)->nullable();
             $table->string('url_text')->nullable();
             $table->enum('url_target', ['_self', '_blank'])->nullable();
-
-            $table->foreign('group_id')->references('id')
-                ->on('hc_menu_group')
-                ->onUpdate('NO ACTION')
-                ->onDelete('NO ACTION');
 
             $table->foreign('type_id')->references('id')
                 ->on('hc_menu_type')
