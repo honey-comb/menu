@@ -29,14 +29,14 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Models;
 
-use HoneyComb\Starter\Models\HCUuidModel;
+use HoneyComb\Starter\Models\HCUuidSoftModel;
 
 
 /**
  * Class HCMenu
  * @package HoneyComb\Menu\Models
  */
-class HCMenu extends HCUuidModel
+class HCMenu extends HCUuidSoftModel
 {
     /**
      * The database table used by the model.
