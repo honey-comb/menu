@@ -38,11 +38,8 @@ class AddGroupIdToHcMenuTable extends Migration
      */
     public function up()
     {
-        Schema::table('hc_menu', function (Blueprint $table) {
+        Schema::table('hc_menu', function(Blueprint $table) {
             $table->uuid('group_id')->index()->nullable()->after('parent_id');
-        });
-
-        Schema::table('hc_menu', function (Blueprint $table) {
             $table->foreign('group_id')->references('id')->on('hc_menu_group');
         });
     }
@@ -54,12 +51,8 @@ class AddGroupIdToHcMenuTable extends Migration
      */
     public function down()
     {
-        Schema::table('hc_menu', function (Blueprint $table) {
+        Schema::table('hc_menu', function(Blueprint $table) {
             $table->dropForeign(['group_id']);
-        });
-
-        Schema::table('hc_menu', function (Blueprint $table) {
-            $table->dropColumn('group_id');
         });
     }
 }
