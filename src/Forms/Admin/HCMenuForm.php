@@ -31,7 +31,9 @@ namespace HoneyComb\Menu\Forms\Admin;
 
 use HoneyComb\Menu\Enum\HCMenuTargetEnum;
 use HoneyComb\Menu\Enum\HCMenuUrlTargetEnum;
+use HoneyComb\Menu\Repositories\HCMenuRepository;
 use HoneyComb\Menu\Repositories\HCMenuTypeRepository;
+use HoneyComb\Menu\Requests\Admin\HCMenuRequest;
 use HoneyComb\Starter\Forms\HCBaseForm;
 
 /**
@@ -45,9 +47,16 @@ class HCMenuForm extends HCBaseForm
      */
     private $menuTypeRepository;
 
-    public function __construct(HCMenuTypeRepository $menuTypeRepository)
+    /**
+     * @var HCMenuRepository
+     */
+    private $menuRepository;
+
+
+    public function __construct(HCMenuTypeRepository $menuTypeRepository, HCMenuRepository $menuRepository)
     {
         $this->menuTypeRepository = $menuTypeRepository;
+        $this->menuRepository = $menuRepository;
     }
 
     /**
@@ -104,9 +113,16 @@ class HCMenuForm extends HCBaseForm
                     'label' => trans('HCMenu::menu_group.group'),
                     'dependencies' => [
                         $prefix . 'type_id' => [
+                            'options' => route('admin.api.menu.group.options'),
                         ],
                     ],
                     'url' => route('admin.api.menu.group.options'),
+                ],
+            $prefix . 'parent_id' =>
+                [
+                    'type' => 'dropDownList',
+                    'label' => trans('HCMenu::menu.parent_id'),
+                    'options' => $this->menuRepository->getOptions(new HCMenuRequest()),
                 ],
             $prefix . 'target' =>
                 [

@@ -120,7 +120,7 @@ class HCMenuRepository extends HCBaseRepository
         return $this->createBuilderQuery($request)->get()->map(function ($record) {
             return [
                 'id' => $record->id,
-                'language_code' => $record->language_code
+                'label' => $record->label
             ];
         });
     }
