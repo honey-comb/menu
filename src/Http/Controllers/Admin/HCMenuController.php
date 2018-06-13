@@ -31,6 +31,7 @@ namespace HoneyComb\Menu\Http\Controllers\Admin;
 
 use HoneyComb\Core\Http\Controllers\HCBaseController;
 use HoneyComb\Core\Http\Controllers\Traits\HCAdminListHeaders;
+use HoneyComb\Menu\Enum\HCMenuTypeEnum;
 use HoneyComb\Menu\Events\Admin\Menu\HCMenuCreated;
 use HoneyComb\Menu\Events\Admin\Menu\HCMenuForceDeleted;
 use HoneyComb\Menu\Events\Admin\Menu\HCMenuRestored;
@@ -92,7 +93,11 @@ class HCMenuController extends HCBaseController
             'url' => route('admin.api.menu'),
             'form' => route('admin.api.form-manager', ['menu']),
             'headers' => $this->getTableColumns(),
-            'actions' => $this->getActions('honey_comb_menu_menu'),
+            'actions' => $this->getActions('honey_comb_menu_menu',
+                ['_delete', '_force_delete', '_merge', '_restore', '_clone']),
+            'filters' => $this->getFilters(),
+            'type' => 'sortable-tree',
+            'disablePagination' => true,
         ];
 
         return view('HCCore::admin.service.index', ['config' => $config]);
@@ -123,22 +128,22 @@ class HCMenuController extends HCBaseController
 
     /**
      * @param string $id
-     * @return HCMenu|null
+     * @return \HoneyComb\Menu\Models\HCMenu|\HoneyComb\Menu\Repositories\HCMenuRepository|\Illuminate\Database\Eloquent\Model|null
      */
-    public function getById(string $id): ? HCMenu
+    public function getById(string $id)
     {
         return $this->service->getRepository()->findOneBy(['id' => $id]);
     }
 
     /**
-     * Creating data list
+     * Creating data list for menu component which means no Paginate. All records with children
      * @param HCMenuRequest $request
      * @return JsonResponse
      */
     public function getListPaginate(HCMenuRequest $request): JsonResponse
     {
         return response()->json(
-            $this->service->getRepository()->getListPaginate($request)
+            $this->service->getRepository()->getListWithChildren($request)
         );
     }
 

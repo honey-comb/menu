@@ -64,8 +64,9 @@ class HCMenuRepository extends HCBaseRepository
 
         /** @var HCMenu $record */
         foreach ($records as $record) {
-            if($record->delete()) {
-                $deleted[] = $record;            }
+            if ($record->delete()) {
+                $deleted[] = $record;
+            }
         }
 
         return $deleted;
@@ -103,7 +104,7 @@ class HCMenuRepository extends HCBaseRepository
 
         /** @var HCMenu $record */
         foreach ($records as $record) {
-            if($record->forceDelete()) {
+            if ($record->forceDelete()) {
                 $deleted[] = $record;
             }
         }
@@ -117,11 +118,21 @@ class HCMenuRepository extends HCBaseRepository
      */
     public function getOptions(HCMenuRequest $request): Collection
     {
-        return $this->createBuilderQuery($request)->get()->map(function ($record) {
+        return $this->createBuilderQuery($request)->get()->map(function($record) {
             return [
                 'id' => $record->id,
-                'label' => $record->label
+                'label' => $record->label,
             ];
         });
+    }
+
+    /**
+     * @param $request
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getListWithChildren(HCMenuRequest $request)
+    {
+        return $this->createBuilderQuery($request, [], true, false)->orderBy('sequence',
+            'asc')->whereNull('parent_id')->with('children')->get();
     }
 }

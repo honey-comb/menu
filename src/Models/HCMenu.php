@@ -30,6 +30,7 @@ declare(strict_types = 1);
 namespace HoneyComb\Menu\Models;
 
 use HoneyComb\Starter\Models\HCUuidSoftModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 /**
@@ -71,5 +72,13 @@ class HCMenu extends HCUuidSoftModel
     protected $with = [
 
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(HCMenu::class, 'parent_id', 'id')->orderBy('sequence', 'ASC')->with('children');
+    }
 
 }
