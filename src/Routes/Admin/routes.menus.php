@@ -50,6 +50,10 @@ Route::domain(config('hc.admin_domain'))
                 ->name('admin.api.menu.create')
                 ->middleware('acl:honey_comb_menu_menu_create');
 
+            Route::patch('/', 'HCMenuController@patch')
+                ->name('admin.api.menu.update')
+                ->middleware('acl:honey_comb_menu_menu_create');
+
             Route::delete('/', 'HCMenuController@deleteSoft')
                 ->name('admin.api.menu.delete')
                 ->middleware('acl:honey_comb_menu_menu_delete');

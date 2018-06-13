@@ -278,4 +278,17 @@ class HCMenuController extends HCBaseController
 
         return $this->response->success('Successfully deleted');
     }
+     * @param \HoneyComb\Menu\Requests\Admin\HCMenuRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function patch(HCMenuRequest $request)
+    {
+        foreach ($request->get('children') as $key => $value) {
+            $this->service->getRepository()->update(['parent_id' => $request->get('parent'), 'sequence' => $key],
+                ['id' => $value]);
+        }
+
+
+        return $this->response->success('Successfully updated');
+    }
 }
