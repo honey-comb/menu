@@ -89,6 +89,8 @@ class HCMenuForm extends HCBaseForm
     /**
      * @param string $prefix
      * @return array
+     * @throws \ReflectionException
+     * @throws \Exception
      */
     public function getStructureNew(string $prefix): array
     {
@@ -122,7 +124,12 @@ class HCMenuForm extends HCBaseForm
                 [
                     'type' => 'dropDownList',
                     'label' => trans('HCMenu::menu.parent_id'),
-                    'options' => $this->menuRepository->getOptions(new HCMenuRequest()),
+                    'dependencies' => [
+                        $prefix . 'type_id' => [
+                            'options' => route('admin.api.menu.options'),
+                        ],
+                    ],
+                    'url' => route('admin.api.menu.options'),
                 ],
             $prefix . 'target' =>
                 [
@@ -182,9 +189,16 @@ class HCMenuForm extends HCBaseForm
     /**
      * @param string $prefix
      * @return array
+     * @throws \ReflectionException
      */
     public function getStructureEdit(string $prefix): array
     {
-        return $this->getStructureNew($prefix);
+        $form = $this->getStructureNew($prefix);
+
+        $form[$prefix . 'parent_id']['hidden'] = 1;
+        $form[$prefix . 'type_id']['hidden'] = 1;
+        $form[$prefix . 'language_code']['hidden'] = 1;
+
+        return $form;
     }
 }
