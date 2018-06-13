@@ -308,6 +308,8 @@ class HCMenuController extends HCBaseController
                 ['id' => $value]);
         }
 
+        //not sure if this is a good practice
+        event(new HCMenuUpdated(new HCMenu()));
 
         return $this->response->success('Successfully updated');
     }
