@@ -148,10 +148,10 @@ class HCMenuController extends HCBaseController
     }
 
     /**
- * Create data list
- * @param HCMenuRequest $request
- * @return JsonResponse
- */
+     * Create data list
+     * @param HCMenuRequest $request
+     * @return JsonResponse
+     */
     public function getOptions(HCMenuRequest $request): JsonResponse
     {
         return response()->json(
@@ -164,6 +164,7 @@ class HCMenuController extends HCBaseController
      *
      * @param HCMenuRequest $request
      * @return JsonResponse
+     * @throws \Exception
      */
     public function store(HCMenuRequest $request): JsonResponse
     {
@@ -278,6 +279,25 @@ class HCMenuController extends HCBaseController
 
         return $this->response->success('Successfully deleted');
     }
+
+    /**
+     * Getting filters
+     *
+     * @return array
+     * @throws \ReflectionException
+     */
+    private function getFilters()
+    {
+        return [
+            'type_id' => [
+                'type' => 'dropDownList',
+                'required' => 1,
+                'options' => HCMenuTypeEnum::options(),
+            ],
+        ];
+    }
+
+    /**
      * @param \HoneyComb\Menu\Requests\Admin\HCMenuRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
