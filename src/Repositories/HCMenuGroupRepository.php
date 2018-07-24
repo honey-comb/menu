@@ -30,7 +30,7 @@ declare(strict_types = 1);
 namespace HoneyComb\Menu\Repositories;
 
 use HoneyComb\Menu\Models\HCMenuGroup;
-use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
+use HoneyComb\Starter\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Menu\Requests\Admin\HCMenuGroupRequest;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
 use Illuminate\Support\Collection;

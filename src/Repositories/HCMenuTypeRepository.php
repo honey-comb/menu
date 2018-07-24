@@ -29,7 +29,7 @@ declare(strict_types = 1);
 
 namespace HoneyComb\Menu\Repositories;
 
-use HoneyComb\Core\Repositories\Traits\HCQueryBuilderTrait;
+use HoneyComb\Starter\Repositories\Traits\HCQueryBuilderTrait;
 use HoneyComb\Menu\Models\HCMenuType;
 use HoneyComb\Menu\Requests\Admin\HCMenuTypeRequest;
 use HoneyComb\Starter\Repositories\HCBaseRepository;
