@@ -39,7 +39,9 @@ use HoneyComb\Menu\Events\Admin\Menu\HCMenuSoftDeleted;
 use HoneyComb\Menu\Events\Admin\Menu\HCMenuUpdated;
 use HoneyComb\Menu\Models\HCMenu;
 use HoneyComb\Menu\Requests\Admin\HCMenuRequest;
+use HoneyComb\Menu\Requests\Admin\HCMenuTypeRequest;
 use HoneyComb\Menu\Services\HCMenuService;
+use HoneyComb\Menu\Services\HCMenuTypeService;
 use HoneyComb\Starter\Helpers\HCFrontendResponse;
 use Illuminate\Database\Connection;
 use Illuminate\Http\JsonResponse;
@@ -69,16 +71,27 @@ class HCMenuController extends HCBaseController
     private $response;
 
     /**
-     * HCMenuController constructor.
-     * @param Connection $connection
-     * @param HCFrontendResponse $response
-     * @param HCMenuService $service
+     * @var HCFrontendResponse
      */
-    public function __construct(Connection $connection, HCFrontendResponse $response, HCMenuService $service)
-    {
+    private $menuTypeService;
+
+    /**
+     * HCMenuController constructor.
+     * @param \Illuminate\Database\Connection $connection
+     * @param \HoneyComb\Starter\Helpers\HCFrontendResponse $response
+     * @param \HoneyComb\Menu\Services\HCMenuService $service
+     * @param \HoneyComb\Menu\Services\HCMenuTypeService $menuTypeService
+     */
+    public function __construct(
+        Connection $connection,
+        HCFrontendResponse $response,
+        HCMenuService $service,
+        HCMenuTypeService $menuTypeService
+    ) {
         $this->connection = $connection;
         $this->response = $response;
         $this->service = $service;
+        $this->menuTypeService = $menuTypeService;
     }
 
     /**
@@ -292,7 +305,7 @@ class HCMenuController extends HCBaseController
             'type_id' => [
                 'type' => 'dropDownList',
                 'required' => 1,
-                'options' => HCMenuTypeEnum::options(),
+                'options' => $this->menuTypeService->getRepository()->getOptions(new HCMenuTypeRequest()),
             ],
         ];
     }
